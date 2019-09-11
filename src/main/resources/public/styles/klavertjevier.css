@@ -51,6 +51,15 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	margin: 0;
 }
 
+.print-header {
+	display: flex;
+	align-items: center;
+}
+
+.print-header img {
+	margin-right: 20px;
+}
+
 @media screen {
 	.yes-print {
 		display: none;

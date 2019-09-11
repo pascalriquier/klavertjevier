@@ -1,12 +1,10 @@
 <div ng-controller="OrderController">
-	<form style="margin-bottom: 20px">                      
-	    <div class="form-group form-inline">                            
-	        <label for="klant">Klant</label>
-			<input ng-model="klant" type="text" class="form-control" id="klant" placeholder="Klant">
-	    </div>
-	</form>
-	
-	
+	<div class="print-header yes-print">
+		<img src="/img/klavertjevier-logo.png"></img>
+		<h1>Afrekening schoolrestaurant Klavertje Vier</h1>
+	</div>
+
+
 	<table class="table table-striped">
 		<thead class="thead-dark">
 			<tr>
@@ -32,7 +30,7 @@
 			</tr>
 			<tr class="no-print">
 				<td>
-					<ui-select id="new-order-lijn" ng-model="selected" theme="bootstrap" style="width:300px;" on-select="addProduct($select.selected)">
+					<ui-select id="new-order-lijn" ng-model="selected" theme="bootstrap" style="width:300px;" on-select="addProduct($select)">
 						<ui-select-match
 							placeholder="Kies een product ...">{{$select.selected.name}}</ui-select-match>
 						<ui-select-choices repeat="product in producten|propsFilter:$select.search:['naam', 'code']|orderBy:'code'" group-by="productType">
@@ -73,7 +71,9 @@
 			</tr>
 		</tbody>
 	</table>
-	<button type="submit" class="btn btn-primary btn-sm" ng-click="saveOrder()">Registreer bestelling</button>
+	
+	
+	<button type="submit" class="btn btn-primary btn-sm" ng-disabled="!afgedrukt" ng-click="saveOrder()">Registreer bestelling</button>
 	<button type="submit" class="btn btn-primary btn-sm" ng-click="afdrukken()">Afdrukken</button>
 	
 </div>

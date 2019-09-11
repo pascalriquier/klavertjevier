@@ -18,21 +18,18 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private LocalDate datum = LocalDate.now();
-	private String klant;
 	private BigDecimal voorschot;
 	@ElementCollection
 	private List<OrderLijn> orderLijnen;
 
-	public Order(String klant, List<OrderLijn> orderLijnen) {
+	public Order(List<OrderLijn> orderLijnen) {
 		this();
-		this.klant = klant;
 		this.orderLijnen = orderLijnen;
 	}
 	
-	public Order(LocalDate datum, String klant, List<OrderLijn> orderLijnen) {
+	public Order(LocalDate datum, List<OrderLijn> orderLijnen) {
 		super();
 		this.datum = datum;
-		this.klant = klant;
 		this.orderLijnen = orderLijnen;
 	}
 
@@ -45,14 +42,6 @@ public class Order {
 
 	public void setDatum(LocalDate datum) {
 		this.datum = datum;
-	}
-
-	public String getKlant() {
-		return klant;
-	}
-
-	public void setKlant(String klant) {
-		this.klant = klant;
 	}
 
 	public List<OrderLijn> getOrderLijnen() {

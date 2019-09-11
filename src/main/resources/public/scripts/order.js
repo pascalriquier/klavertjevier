@@ -43,17 +43,21 @@ angular.module('klavertjevier-app').controller('OrderController', function($scop
 
 	}
 	
-	$scope.addProduct = function(product) {
-		$scope.orderLijnen.push({product: product, aantal : 1});
-		setTimeout(function() {
-			$('input[autofocus]:last').focus();
-		});
+	$scope.addProduct = function(select, event) {
+		if (select.selected) {
+			$scope.orderLijnen.push({product: select.selected, aantal : 1});
+			select.clear({
+				stopPropagation: function(){}
+			});
+			setTimeout(function() {
+				$('input[autofocus]:last').focus();
+			});
+		}
 	};
 	
 	$scope.saveOrder = function() {
 		var order = {
 			producten: {},
-			klant: $scope.klant,
 			voorschot: $scope.voorschot
 		};
 		$scope.orderLijnen.forEach(function(orderLijn) {
@@ -63,8 +67,8 @@ angular.module('klavertjevier-app').controller('OrderController', function($scop
 		$http.post('/rest/order', order)
 		   .then(function(response){
 			   $scope.orderLijnen = []
-			   $scope.klant = '';
 			   $scope.voorschot = null;
+			   $scope.afgedrukt = false;
 		    },
 		    function(response){});
 	}
@@ -80,6 +84,7 @@ angular.module('klavertjevier-app').controller('OrderController', function($scop
 	}
 	
 	$scope.afdrukken = function() {
+		$scope.afgedrukt = true;
 		window.print();
 	}
 });

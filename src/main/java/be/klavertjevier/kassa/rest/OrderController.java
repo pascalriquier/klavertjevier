@@ -34,7 +34,6 @@ public class OrderController {
 	@PostMapping("/rest/order")
 	public void saveOrder(@RequestBody OrderDTO orderDTO) {
 		Order order = new Order();
-		order.setKlant(orderDTO.getKlant());
 		order.setVoorschot(orderDTO.getVoorschot());
 		List<OrderLijn> orderLijnen = orderDTO.producten.entrySet().stream().map(this::toOrderLijn).collect(Collectors.toList());
 		order.setOrderLijnen(orderLijnen);
@@ -61,7 +60,6 @@ public class OrderController {
 	}
 	
 	public static class OrderDTO {
-		private String klant;
 		private BigDecimal voorschot;
 		private Map<Integer, Integer> producten;
 
@@ -71,14 +69,6 @@ public class OrderController {
 
 		public void setProducten(Map<Integer, Integer> producten) {
 			this.producten = producten;
-		}
-
-		public String getKlant() {
-			return klant;
-		}
-
-		public void setKlant(String klant) {
-			this.klant = klant;
 		}
 
 		public BigDecimal getVoorschot() {

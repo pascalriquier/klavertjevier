@@ -43,8 +43,8 @@ public class KassaApplicationTests {
 		Product p2 = productRepository.save(new Product(2, "p2", new BigDecimal("2.20"), ProductType.DRANK));
 		Product p3 = productRepository.save(new Product(3, "p3", new BigDecimal("2.20"), ProductType.HOOFDGERECHT));
 		
-		orderRepository.save(new Order("klant", Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 1))));
-		orderRepository.save(new Order("klant2", Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 2), new OrderLijn(p3, 5))));
+		orderRepository.save(new Order(Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 1))));
+		orderRepository.save(new Order( Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 2), new OrderLijn(p3, 5))));
 		
 		Map<ProductType, Map<String, Integer>> totalenPerProduct = orderRepository.totalenPerProduct(null);
 		assertThat(totalenPerProduct).hasSize(2);
@@ -61,9 +61,9 @@ public class KassaApplicationTests {
 		Product p2 = productRepository.save(new Product(2, "p2", new BigDecimal("2.20"), ProductType.DRANK));
 		Product p3 = productRepository.save(new Product(3, "p3", new BigDecimal("2.20"), ProductType.HOOFDGERECHT));
 		
-		orderRepository.save(new Order("klant", Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 1))));
-		orderRepository.save(new Order("klant2", Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 2), new OrderLijn(p3, 5))));
-		orderRepository.save(new Order(LocalDate.now().minusDays(1), "klant2", Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 2), new OrderLijn(p3, 5))));
+		orderRepository.save(new Order(Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 1))));
+		orderRepository.save(new Order(Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 2), new OrderLijn(p3, 5))));
+		orderRepository.save(new Order(LocalDate.now().minusDays(1),  Arrays.asList(new OrderLijn(p1, 2), new OrderLijn(p2, 2), new OrderLijn(p3, 5))));
 		
 		Map<ProductType, Map<String, Integer>> totalenPerProduct = orderRepository.totalenPerProduct(LocalDate.now());
 		assertThat(totalenPerProduct).hasSize(2);
