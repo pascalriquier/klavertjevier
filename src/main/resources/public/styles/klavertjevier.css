@@ -1,0 +1,75 @@
+body {
+	font: normal 10px Verdana, Arial, sans-serif;
+}
+
+h1 {
+	font: bold 12px Verdana, Arial, sans-serif;
+}
+
+h2 {
+	font: bold 12px Verdana, Arial, sans-serif;
+}
+
+thead td {
+	font: bold 10px Verdana, Arial, sans-serif;
+}
+
+tbody td {
+	font: bold 10px Verdana, Arial, sans-serif;
+}
+
+input {
+	font: normal 10px Verdana, Arial, sans-serif;
+}
+
+.form-control, .btn-sm {
+	font-size: 10px;
+}
+
+#main_content {
+	margin-top: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.ui-select-choices.ui-select-choices-content.ui-select-dropdown.dropdown-menu
+	{
+	display: block;
+}
+
+.form-group label {
+	margin-right: 20px;
+}
+
+.ui-select-multiple.ui-select-bootstrap {
+	min-height: 31px;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+@media screen {
+	.yes-print {
+		display: none;
+	}
+}
+
+@media print {
+	button, .no-print {
+		display: none !important;
+	}
+	input, textarea {
+		outline: none !important;
+	}
+	.form-control, .form-control.nobug {
+		border: 0;
+		outline: 0;
+		box-shadow: none;
+	}
+	.form-control.nobug {
+		transition: none; /*-- THIS IS IMPORTANT -- */
+	}
+}

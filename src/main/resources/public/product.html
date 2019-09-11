@@ -1,0 +1,49 @@
+<div ng-controller="ProductController">
+	<h1>Nieuw product</h1>
+
+	<form style="margin-bottom: 20px" name="productForm">                      
+	    <div class="form-group form-inline">                            
+	        <label for="code">Code</label>
+			<input ng-model="product.code" type="number" class="form-control" id="code" placeholder="Unieke productcode" ng-required="true">
+	    </div>
+	    <div class="form-group form-inline">                            
+	        <label for="naam">Naam</label>
+			<input ng-model="product.naam" type="text" class="form-control" id="naam" placeholder="Naam" ng-required="true">
+	    </div>
+	    <div class="form-group form-inline">                            
+	        <label for="type">Type</label>
+			<select ng-model="product.type" ng-options="o as o for o in productTypes" ng-required="true"></select>
+	    </div>
+	    <div class="form-group form-inline">                            
+	        <label for="prijs">Prijs</label>
+			<input ng-model="product.prijs" type="number" class="form-control" id="prijs" placeholder="Prijs product" step="any" ng-required="true">
+			<span> &euro;</span>
+	    </div>
+		<button type="submit" class="btn btn-primary btn-sm" ng-click="saveProduct()" ng-disabled="productForm.$invalid">Maak product</button>
+	</form>
+
+	<div ng-repeat="type in productTypes">
+		<h1>{{type}}</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>Code</td>
+					<td>Naam</td>
+					<td>Prijs</td>
+					<td>&nbsp;</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in productenVanType(type)">
+					<td>{{product.code}}</td>
+					<td>{{product.naam}}</td>
+					<td>{{product.prijs}} &euro;</td>
+					
+					<td>
+						<button type="button" class="btn btn-danger btn-sm" ng-click="verwijderProduct(product)">Verwijderen</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

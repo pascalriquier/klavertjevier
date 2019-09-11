@@ -1,0 +1,24 @@
+<div ng-controller="OverzichtController">
+	<div>
+		<button type="button" class="btn btn-danger btn-sm" ng-click="verwijderOrders()">Verwijder alle bestellingen</button>
+	</div>
+
+	<form style="margin-top: 20px">                      
+	    <div class="form-group form-inline">                            
+	        <label for="datum">Datum</label>
+			<select ng-model="datum" ng-options="obj.value as obj.text for obj in orderDatums" ng-change="datumSelected()">
+			</select>
+	    </div>
+	</form>
+
+	<h1>Totalen</h1>
+	<div ng-repeat="(producttype, totalenvoorproducttype) in totalen">
+		<h2>{{producttype}}</h2>
+		<table class="table table-striped">
+		  <tr ng-repeat="(key, value) in totalenvoorproducttype">
+		    <td> {{key}} </td> <td> {{ value }} </td>
+		  </tr>
+		</table>
+	</div>
+	
+</div>
