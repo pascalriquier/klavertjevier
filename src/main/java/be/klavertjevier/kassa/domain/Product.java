@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class Product {
 	public enum ProductType {
-		VOORGERECHT, HOOFDGERECHT, DESSERT, DRANK
+		VOORGERECHT, HOOFDGERECHT_GROOT, HOOFDGERECHT_KLEIN, DESSERT, DRANK
 	}
 	
 	

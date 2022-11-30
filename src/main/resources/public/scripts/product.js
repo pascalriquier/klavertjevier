@@ -9,7 +9,7 @@ angular.module('klavertjevier-app').controller('ProductController', function($sc
 	}, function errorCallback(response) {
 	});
 	
-	$scope.productTypes = ['DRANK', 'VOORGERECHT', 'HOOFDGERECHT', 'DESSERT'];
+	$scope.productTypes = ['DRANK', 'VOORGERECHT', 'HOOFDGERECHT_GROOT', 'HOOFDGERECHT_KLEIN', 'DESSERT'];
 	$scope.product = {};
 	
 	$scope.saveProduct = function() {

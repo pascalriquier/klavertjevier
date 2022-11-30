@@ -1,0 +1,68 @@
+<div ng-controller="AfrekenenController">
+	<div class="print-header yes-print">
+	</div>
+
+	<div class="container">
+		<div class="row mb-3">
+ 			<dt class="col-sm-3">Naam</dt>
+  			<dd class="col-sm-9">{{klant.naam}}</dd>
+ 			<dt class="col-sm-3">Nummer</dt>
+  			<dd class="col-sm-9">{{klant.nummer}}</dd>
+  		</div>
+  		
+  		<div class="row mb-3" ng-repeat="order in orders">
+  			<div ng-class="{betaald: order.betaald, nietbetaald: !order.betaald, 'no-print': order.verwerkt}" class="col">
+				<table class="table table-striped table-sm">
+					<caption>
+						Bestelling van {{order.datum}} 
+						<span ng-if="order.betaald">(Betaald - {{order.betaaldMet}})</span>
+						<span ng-if="!order.betaald">(Onbetaald)</span>
+					</caption>
+					<thead class="thead-dark">
+						<tr>
+							<td>Productcode</td>
+							<td>Productnaam</td>
+							<td>Prijs</td>
+							<td>Aantal</td>
+							<td>Totaal</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="orderLijn in order.orderLijnen">
+							<td>{{orderLijn.product.code}}</td>
+							<td>{{orderLijn.product.naam}}</td>
+							<td>{{orderLijn.product.prijs}} <span>&euro;</span></td>
+							<td>{{orderLijn.quantity}}</td>
+							<td>{{orderLijnTotaal(orderLijn)}} <span>&euro;</span></td>
+						</tr>
+						<tr>
+							<td>Totaal</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>{{orderTotaal(order)}} <span>&euro;</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="mb-2">
+	  				<span ng-if="order.geannuleerd">Geannuleerd</span>
+	  				<button type="button" class="btn btn-danger btn-sm" ng-if="!order.geannuleerd && !order.verwerkt" ng-click="orderRechtzetten(order)">Bestelling rechtzetten</button>
+				</div>
+  			</div>
+		</div>
+		
+		<div class="row mb-3">
+ 			<dt class="col-sm-3">Reeds betaald</dt>
+  			<dd class="col-sm-9">{{reedsBetaald()}} <span>&euro;</span></dd>
+ 			<dt class="col-sm-3">Totaal te betalen</dt>
+  			<dd class="col-sm-9">{{totaalTeBetalen()}} <span>&euro;</span></dd>
+		</div>
+		
+		<div class="row">
+<!-- 			<button type="submit" class="btn btn-primary btn-sm mr-1" ng-click="betaald()">Betaald</button> -->
+			<button type="submit" class="btn btn-primary btn-sm mr-1" ng-click="cashVerwerkt()">Cash verwerkt</button>
+			<button type="submit" class="btn btn-primary btn-sm mr-1" ng-click="elektronischVerwerkt()">Elektronische verwerkt</button>
+			<button type="submit" class="btn btn-primary btn-sm" ng-click="print()">Print</button>
+		</div>
+	</div>
+</div>

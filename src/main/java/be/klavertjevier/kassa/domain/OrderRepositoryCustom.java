@@ -8,7 +8,11 @@ import be.klavertjevier.kassa.domain.Product.ProductType;
 
 public interface OrderRepositoryCustom {
 
-	Map<ProductType, Map<String, Integer>> totalenPerProduct(LocalDate datum);
+	Map<ProductType, Map<Integer, Integer>> totalenPerProduct(LocalDate datum);
+
+	Map<Integer, Integer> totalenPerProduct(LocalDate datum, BetaalWijze betaalWijze);
+	
+	Integer ordersPerDag(LocalDate datum);
 	
 	List<LocalDate> getOrderDatums();
 }

@@ -1,6 +1,9 @@
 <div ng-controller="OverzichtController">
 	<div>
 		<button type="button" class="btn btn-danger btn-sm" ng-click="verwijderOrders()">Verwijder alle bestellingen</button>
+		<a ng-href="{{exporteerLink()}}" class="link-primary" target="_blank">
+			Exporteer bestellingen
+		</a>
 	</div>
 
 	<form style="margin-top: 20px">                      
@@ -10,13 +13,27 @@
 			</select>
 	    </div>
 	</form>
+	
+	<div>Totaal aantal bestellingen: {{aantalOrders}}</div>
 
-	<h1>Totalen</h1>
 	<div ng-repeat="(producttype, totalenvoorproducttype) in totalen">
 		<h2>{{producttype}}</h2>
 		<table class="table table-striped">
-		  <tr ng-repeat="(key, value) in totalenvoorproducttype">
-		    <td> {{key}} </td> <td> {{ value }} </td>
+		  <thead>
+		  	<tr>
+		  		<th>Code</th>
+		  		<th>Naam</th>
+		  		<th>Eenheidsprijs</th>
+		  		<th>Aantal verkocht</th>
+		  		<th>Totaal</th>
+		  	</tr>
+		  </thead>
+		  <tr ng-repeat="(productCode, aantalVerkocht) in totalenvoorproducttype">
+		    <td> {{productCode}} </td> 
+		    <td> {{naam(productCode)}} </td> 
+		    <td> {{eenheidsPrijs(productCode)}} &euro;</td> 
+		    <td> {{ aantalVerkocht }} </td>
+		    <td> {{ totaalBedragVerkocht(aantalVerkocht, productCode) }} &euro;</td>
 		  </tr>
 		</table>
 	</div>

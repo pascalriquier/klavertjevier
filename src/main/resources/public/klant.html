@@ -1,0 +1,62 @@
+<div ng-controller="KlantenController">
+	<div class="container">
+		<div class="row mb-3">
+			<button type="button" class="btn btn-danger btn-sm" ng-click="verwijderAlleKlanten()">Verwijder alle klanten</button>
+		</div>
+		<div class="row">
+			<div class="col">
+				<h1>Nieuwe klant</h1>
+				<form style="margin-bottom: 20px" name="klantForm">                      
+				    <div class="form-group form-inline">                            
+				        <label for="naam">Naam</label>
+						<input ng-model="klant.naam" type="text" class="form-control" id="naam" placeholder="Naam" ng-required="true">
+				    </div>
+				    <div class="form-group form-inline">                            
+				        <label for="type">Nummer</label>
+						<input ng-model="klant.nummer" type="text" class="form-control" id="nummer" placeholder="Nummer" ng-required="true" pattern="[0-9]{3}">
+				    </div>
+					<button type="submit" class="btn btn-primary btn-sm" ng-click="saveKlant()" ng-disabled="klantForm.$invalid">Maak klant</button>
+				</form>
+			</div>
+			<div class="col">
+				<h1>Klant opzoeken</h1>
+				<form style="margin-bottom: 20px" name="klantZoekenForm">                      
+				    <div class="form-group form-inline">                            
+				        <label for="naam">Naam</label>
+						<input ng-model="klantZoeken.naam" type="text" class="form-control" id="naam" placeholder="Naam">
+				    </div>
+				    <div class="form-group form-inline">                            
+				        <label for="type">Nummer</label>
+						<input ng-model="klantZoeken.nummer" type="text" class="form-control" id="nummer" placeholder="Nummer">
+				    </div>
+					<button type="submit" class="btn btn-primary btn-sm" ng-click="zoekKlant()" ng-disabled="klantZoekenForm.$invalid">Zoek klant</button>
+				</form>
+			</div>
+		</div>
+		
+		<div class="row">
+			<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>Naam</td>
+					<td>Nummer</td>
+					<td>&nbsp;</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="klant in klanten">
+					<td>{{klant.naam}}</td>
+					<td>{{klant.nummer}}</td>
+					<td>
+						<button type="button" class="btn btn-primary btn-sm" ng-click="bestellingOpnemen(klant)">Bestelling opnemen</button>
+						<button type="button" class="btn btn-primary btn-sm" ng-click="afrekenen(klant)">Afrekenen</button>
+						<button type="button" class="btn btn-danger btn-sm" ng-click="verwijderKlant(klant)">Verwijder klant</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+			
+		</div>		
+	</div>
+
+</div>

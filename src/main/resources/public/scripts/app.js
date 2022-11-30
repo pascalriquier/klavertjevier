@@ -19,12 +19,12 @@ angular.module('klavertjevier-app', ['ui.router', 'ui.select', 'ngSanitize'])
         		}
         	}
         });
-    	$stateProvider.state('order-state', {
+    	$stateProvider.state('klanten-state', {
     		parent: 'klavertjevier',
-    		url: '/orders',
+    		url: '/klanten',
     		views: {
     			'content@': {
-    				templateUrl: './order.html'
+    				templateUrl: './klant.html'
     			}
     		}
     	});
@@ -34,6 +34,36 @@ angular.module('klavertjevier-app', ['ui.router', 'ui.select', 'ngSanitize'])
     		views: {
     			'content@': {
     				templateUrl: './overzicht.html'
+    			}
+    		}
+    	});
+    	
+    	$stateProvider.state('order-state', {
+    		parent: 'klavertjevier',
+    		url: '/order/:klantId',
+    		views: {
+    			'content@': {
+    				templateUrl: './order.html'
+    			}
+    		}
+    	});
+
+    	$stateProvider.state('afrekenen-state', {
+    		parent: 'klavertjevier',
+    		url: '/afrekenen/:klantId',
+    		views: {
+    			'content@': {
+    				templateUrl: './afrekenen.html'
+    			}
+    		}
+    	});
+ 
+    	$stateProvider.state('wanbetalers-state', {
+    		parent: 'klavertjevier',
+    		url: '/wanbetalers',
+    		views: {
+    			'content@': {
+    				templateUrl: './wanbetalers.html'
     			}
     		}
     	});

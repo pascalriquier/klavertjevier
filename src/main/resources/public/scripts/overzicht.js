@@ -31,9 +31,43 @@ angular.module('klavertjevier-app').controller('OverzichtController', function($
 			$scope.totalen = response.data;
 		}, function errorCallback(response) {
 		});
+		
+		var aantalOrdersUrl = '/rest/orders/totalen';
+		if (angular.isDefined(datum) && datum != '') {
+			aantalOrdersUrl += "?datum=" + datum;
+		}
+		$http({
+			method : 'GET',
+			url : aantalOrdersUrl
+		}).then(function successCallback(response) {
+			$scope.aantalOrders = response.data;
+		}, function errorCallback(response) {
+		});
 	}
 
-	loadTotalen();
+	$http({
+		method : 'GET',
+		url : '/rest/products'
+	}).then(function successCallback(response) {
+		$scope.producten = response.data;
+	}, function errorCallback(response) {
+	}).then(function() {
+		loadTotalen();
+	});
+
+
+	$scope.eenheidsPrijs = function(productCode) {
+		return $scope.producten.find((product) => product.code == productCode).prijs;
+	}
+
+	$scope.naam = function(productCode) {
+		return $scope.producten.find((product) => product.code == productCode).naam;
+	}
+	
+	$scope.totaalBedragVerkocht = function(aantalVerkocht, productCode) {
+		return $scope.eenheidsPrijs(productCode) * aantalVerkocht;
+	}
+	
 
 	$scope.verwijderOrders = function() {
 		$http({
@@ -44,5 +78,13 @@ angular.module('klavertjevier-app').controller('OverzichtController', function($
 		}, function errorCallback(response) {
 		});
 
+	}
+	
+	$scope.exporteerLink = function() {
+		var url = '/rest/orders/exporteer';
+		if (angular.isDefined($scope.datum) && $scope.datum != '') {
+			url += "?datum=" + $scope.datum;
+		}
+		return url;
 	}
 });

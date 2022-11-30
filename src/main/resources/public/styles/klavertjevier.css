@@ -2,28 +2,12 @@ body {
 	font: normal 10px Verdana, Arial, sans-serif;
 }
 
-h1 {
-	font: bold 12px Verdana, Arial, sans-serif;
+h1, h2 {
+	font-size: 120%;
 }
 
-h2 {
-	font: bold 12px Verdana, Arial, sans-serif;
-}
-
-thead td {
-	font: bold 10px Verdana, Arial, sans-serif;
-}
-
-tbody td {
-	font: bold 10px Verdana, Arial, sans-serif;
-}
-
-input {
-	font: normal 10px Verdana, Arial, sans-serif;
-}
-
-.form-control, .btn-sm {
-	font-size: 10px;
+.table, input, .form-control, .btn-sm  {
+	font-size: 100%;
 }
 
 #main_content {
@@ -51,6 +35,14 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	margin: 0;
 }
 
+.betaald {
+	border: 3px solid green;
+}
+
+.nietbetaald {
+	border: 3px solid red;
+}
+
 .print-header {
 	display: flex;
 	align-items: center;
@@ -58,6 +50,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .print-header img {
 	margin-right: 20px;
+	margin-bottom: 20px;
 }
 
 @media screen {
@@ -67,18 +60,23 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 @media print {
-	button, .no-print {
+	body {
+		font: normal 20px Verdana, Arial, sans-serif;
+	}
+	
+	button {
 		display: none !important;
 	}
-	input, textarea {
-		outline: none !important;
+
+	.no-print {
+/* 		display: none !important; */
 	}
-	.form-control, .form-control.nobug {
-		border: 0;
-		outline: 0;
-		box-shadow: none;
+
+	.betaald {
+		border: none;
 	}
-	.form-control.nobug {
-		transition: none; /*-- THIS IS IMPORTANT -- */
+	
+	.nietbetaald {
+		border: none;
 	}
 }

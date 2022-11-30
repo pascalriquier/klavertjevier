@@ -1,0 +1,1 @@
+java -jar C:\Users\riquipa\.m2\repository\be\klavertjevier\kassa\0.0.1-SNAPSHOT\kassa-0.0.1-SNAPSHOT.jar --spring.profiles.active=postgres

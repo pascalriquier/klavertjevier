@@ -1,11 +1,20 @@
 'use strict';
 
-angular.module('klavertjevier-app').controller('OrderController', function($scope, $http) {
+angular.module('klavertjevier-app').controller('OrderController', function($scope, $http, $stateParams, $state) {
+	
 	$http({
 		method : 'GET',
 		url : '/rest/products'
 	}).then(function successCallback(response) {
 		$scope.producten = response.data;
+	}, function errorCallback(response) {
+	});
+
+	$http({
+		method : 'GET',
+		url : '/rest/klant/' + $stateParams.klantId
+	}).then(function successCallback(response) {
+		$scope.klant = response.data;
 	}, function errorCallback(response) {
 	});
 
@@ -34,15 +43,6 @@ angular.module('klavertjevier-app').controller('OrderController', function($scop
 		}).reduce((a, b) => a + b, 0), 2);
 	};
 	
-	$scope.afrekening = function() {
-		var totaalOrder = $scope.orderTotaal();
-		if ($scope.voorschot) {
-			totaalOrder -= round($scope.voorschot, 2);
-		}
-		return round(totaalOrder, 2);
-
-	}
-	
 	$scope.addProduct = function(select, event) {
 		if (select.selected) {
 			$scope.orderLijnen.push({product: select.selected, aantal : 1});
@@ -56,21 +56,32 @@ angular.module('klavertjevier-app').controller('OrderController', function($scop
 	};
 	
 	$scope.saveOrder = function() {
+		$scope.save(function() {
+			$scope.orderLijnen = [];
+			$state.go('klanten-state');
+		});
+	}
+	
+	$scope.save = function(callback) {
 		var order = {
 			producten: {},
-			voorschot: $scope.voorschot
+			klant: $scope.klant.id
 		};
 		$scope.orderLijnen.forEach(function(orderLijn) {
 			order.producten[orderLijn.product.code] = orderLijn.aantal;
 		});
 		
 		$http.post('/rest/order', order)
-		   .then(function(response){
-			   $scope.orderLijnen = []
-			   $scope.voorschot = null;
-			   $scope.afgedrukt = false;
-		    },
-		    function(response){});
+		.then(function(response){
+			callback();
+		},
+		function(response){});
+	}
+	
+	$scope.saveOrderEnAfrekenen = function() {
+		$scope.save(function() {
+			$state.go('afrekenen-state', {klantId: $scope.klant.id});
+		});
 	}
 	
 	$scope.onTextFocus = function ($event) {
@@ -83,8 +94,4 @@ angular.module('klavertjevier-app').controller('OrderController', function($scop
 		}
 	}
 	
-	$scope.afdrukken = function() {
-		$scope.afgedrukt = true;
-		window.print();
-	}
 });

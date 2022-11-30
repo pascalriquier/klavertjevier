@@ -1,0 +1,26 @@
+<div ng-controller="WanbetalersController">
+	<div class="container">
+		<div class="row">
+			<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>Naam</td>
+					<td>Nummer</td>
+					<td>&nbsp;</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="klant in wanbetalers">
+					<td>{{klant.naam}}</td>
+					<td>{{klant.nummer}}</td>
+					<td>
+						<button type="button" class="btn btn-primary btn-sm" ng-click="afrekenen(klant)">Bekijken</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+			
+		</div>		
+	</div>
+	
+</div>
