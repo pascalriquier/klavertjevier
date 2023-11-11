@@ -70,13 +70,15 @@ angular.module('klavertjevier-app').controller('OverzichtController', function($
 	
 
 	$scope.verwijderOrders = function() {
-		$http({
-			method : 'DELETE',
-			url : '/rest/orders'
-		}).then(function successCallback(response) {
-			loadTotalen($scope.datum);
-		}, function errorCallback(response) {
-		});
+		if (confirm("Bent u zeker dat u alle orders wil verwijderen?")) {
+			$http({
+				method : 'DELETE',
+				url : '/rest/orders'
+			}).then(function successCallback(response) {
+				loadTotalen($scope.datum);
+			}, function errorCallback(response) {
+			});
+		}
 
 	}
 	

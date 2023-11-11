@@ -43,6 +43,16 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	border: 3px solid red;
 }
 
+#cashBetaaldMet {
+	width: 100px;
+	display: inline;
+}
+
+#klantnaam {
+	width: 100px;
+	display: inline;
+}
+
 .print-header {
 	display: flex;
 	align-items: center;

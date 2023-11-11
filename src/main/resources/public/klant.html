@@ -12,7 +12,7 @@
 						<input ng-model="klant.naam" type="text" class="form-control" id="naam" placeholder="Naam" ng-required="true">
 				    </div>
 				    <div class="form-group form-inline">                            
-				        <label for="type">Nummer</label>
+				        <label for="nummer">Nummer</label>
 						<input ng-model="klant.nummer" type="text" class="form-control" id="nummer" placeholder="Nummer" ng-required="true" pattern="[0-9]{3}">
 				    </div>
 					<button type="submit" class="btn btn-primary btn-sm" ng-click="saveKlant()" ng-disabled="klantForm.$invalid">Maak klant</button>
@@ -26,26 +26,50 @@
 						<input ng-model="klantZoeken.naam" type="text" class="form-control" id="naam" placeholder="Naam">
 				    </div>
 				    <div class="form-group form-inline">                            
-				        <label for="type">Nummer</label>
+				        <label for="nummer">Nummer</label>
 						<input ng-model="klantZoeken.nummer" type="text" class="form-control" id="nummer" placeholder="Nummer">
 				    </div>
 					<button type="submit" class="btn btn-primary btn-sm" ng-click="zoekKlant()" ng-disabled="klantZoekenForm.$invalid">Zoek klant</button>
 				</form>
 			</div>
 		</div>
+
+		<div class="btn-group">
+			<label class="btn btn-default">
+				<input type="radio" value="nummer" ng-model="sort">
+				Sorteer op nummer
+			</label>
+			<label class="btn btn-default" >
+				<input type="radio" value="naam" ng-model="sort">
+				Sorteer op naam
+			</label>
+		</div>
 		
 		<div class="row">
 			<table class="table table-striped">
 			<thead>
 				<tr>
-					<td>Naam</td>
-					<td>Nummer</td>
-					<td>&nbsp;</td>
+					<th>Naam</th>
+					<th>Nummer</th>
+					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="klant in klanten">
-					<td>{{klant.naam}}</td>
+					<td>
+					    <div ng-if="editKlant.nummer != klant.nummer">
+							{{klant.naam}}
+							<button type="button" class="btn btn-sm" ng-click="edit(klant)">
+								<i class="bi-pencil"></i>
+							</button>
+					    </div>
+					    <div ng-if="editKlant.nummer == klant.nummer">
+							<input ng-model="editKlant.naam" type="text" class="form-control" id="klantnaam">
+							<button type="button" class="btn btn-sm" ng-click="save(klant)">
+								<i class="bi-save"></i>
+							</button>
+					    </div>
+					</td>
 					<td>{{klant.nummer}}</td>
 					<td>
 						<button type="button" class="btn btn-primary btn-sm" ng-click="bestellingOpnemen(klant)">Bestelling opnemen</button>

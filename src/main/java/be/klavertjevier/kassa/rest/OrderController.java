@@ -21,6 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -95,6 +96,11 @@ public class OrderController {
 		orderRepository.delete(orderRepository.findById(id).orElse(null));
 	}
 
+	@GetMapping(value = "/rest/order/{id}")
+	public Order findOrder(@PathVariable Integer id) {
+		return orderRepository.findById(id).orElse(null);
+	}
+	
 	@RequestMapping("/rest/orders/totalenperproduct")
 	public Map<ProductType, Map<Integer, Integer>> totalenPerProduct(
 			@RequestParam(value = "datum", required = false) String datum) {

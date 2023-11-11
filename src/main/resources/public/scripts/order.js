@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('klavertjevier-app').controller('OrderController', function($scope, $http, $stateParams, $state) {
+	$scope.orderLijnen = [];
 	
 	$http({
 		method : 'GET',
@@ -18,7 +19,19 @@ angular.module('klavertjevier-app').controller('OrderController', function($scop
 	}, function errorCallback(response) {
 	});
 
-	$scope.orderLijnen = [];
+	if ($stateParams.orderId) {
+		$http({
+			method : 'GET',
+			url : '/rest/order/' + $stateParams.orderId
+		}).then(function successCallback(response) {
+			console.log(response);
+			response.data.orderLijnen.forEach(function(orderLijn){
+				$scope.orderLijnen.push({product: orderLijn.product, aantal: orderLijn.quantity});
+			});
+		}, function errorCallback(response) {
+		});
+	}
+	
 	
 	function round(value, places) {
 	    var multiplier = Math.pow(10, places);
@@ -30,7 +43,9 @@ angular.module('klavertjevier-app').controller('OrderController', function($scop
 	}
 	
 	$scope.verwijderOrderLijn = function(orderLijn) {
-		$scope.orderLijnen.splice($scope.orderLijnen.indexOf(orderLijn), 1);
+		if (confirm("Bent u zeker dat u deze orderlijn wil verwijderen")) {
+			$scope.orderLijnen.splice($scope.orderLijnen.indexOf(orderLijn), 1);
+		}
 	}
 
 	$scope.orderLijnTotaal = function(orderLijn) {

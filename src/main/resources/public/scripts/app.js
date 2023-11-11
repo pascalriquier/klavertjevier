@@ -48,6 +48,16 @@ angular.module('klavertjevier-app', ['ui.router', 'ui.select', 'ngSanitize'])
     		}
     	});
 
+    	$stateProvider.state('order-rechtzetting-state', {
+    		parent: 'klavertjevier',
+    		url: '/order/:klantId/rechtzetting/:orderId',
+    		views: {
+    			'content@': {
+    				templateUrl: './order.html'
+    			}
+    		}
+    	});
+    	
     	$stateProvider.state('afrekenen-state', {
     		parent: 'klavertjevier',
     		url: '/afrekenen/:klantId',

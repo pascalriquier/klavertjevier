@@ -1,0 +1,26 @@
+Hoi Pascal,
+
+Hieronder de bedenkingen die wij hebben genoteerd i.v.m. het programma voor de kassa voor de JM:
+
+DONE
+- uur erbij zetten (staat nu op 00:00), zou bvb handig zijn om te weten hoe lang het geleden is dat je het laatste briefje hebt ingezet
+
+DONE
+- als je kiest voor cash, kunnen intikken met hoeveel ze betalen en hoeveel ze moeten terugkrijgen
+
+TODO
+- mogelijkheid om iets te schrappen uit 1 bestelling. Nu moesten we de hele bestelling van 1 briefje annuleren en wat wel juist was opnieuw helemaal ingeven
+
+DONE
+- naam van de klant kunnen wijzigen
+
+DONE
+- pop-up op de rode verwijdervelden (voor als je hier per ongeluk op zou klikken :-))
+
+DONE
+- het overzichtsscherm ofwel op nummer sorteren, ofwel alfabetisch, zodat het makkelijker is om iemand terug te vinden
+
+Wij hebben er natuurlijk geen idee van hoeveel werk deze aanpassingen zijn, dus bekijk maar eens wat haalbaar is!
+
+Gr
+Y en K

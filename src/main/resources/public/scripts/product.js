@@ -22,13 +22,15 @@ angular.module('klavertjevier-app').controller('ProductController', function($sc
 	}
 	
 	$scope.verwijderProduct = function(product) {
-		$http({
-			method : 'DELETE',
-			url : '/rest/product/' + product.code
-		}).then(function successCallback(response) {
-			$scope.producten.splice($scope.producten.indexOf(product), 1);
-		}, function errorCallback(response) {
-		});
+		if (confirm("Bent u zeker dat u dit product wil verwijderen?")) {
+			$http({
+				method : 'DELETE',
+				url : '/rest/product/' + product.code
+			}).then(function successCallback(response) {
+				$scope.producten.splice($scope.producten.indexOf(product), 1);
+			}, function errorCallback(response) {
+			});
+		}
 	}
 	
 	$scope.productenVanType = function(type) {

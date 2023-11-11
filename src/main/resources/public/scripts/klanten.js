@@ -4,12 +4,38 @@ angular.module('klavertjevier-app').controller('KlantenController', function($sc
 	$scope.klant = {};
 	$scope.klantZoeken = {};
 	$scope.klanten = [];
+	$scope.sort = "nummer";
+	$scope.editKlant = null;
+	
+	$scope.edit = function(klant) {
+		$scope.editKlant = klant;
+	}
+
+	$scope.save = function(klant) {
+		klant.naam = $scope.editKlant.naam;
+		$http.put('/rest/klant/' + klant.id, klant).then(function successCallback(response) {
+			$scope.editKlant = null;
+			$scope.klanten = sort($scope.klanten);
+		}, function errorCallback(response) {
+		});
+
+	}
+	
+	function sort(klanten) {
+		return klanten.sort(function(a, b){
+			return a[$scope.sort].toLowerCase().localeCompare(b[$scope.sort].toLowerCase());
+		})
+	}
+	
+	$scope.$watch("sort", function(){
+		$scope.klanten = sort($scope.klanten);
+	});
 	
 	$scope.saveKlant = function() {
 		$http.post('/rest/klant', $scope.klant)
 		   .then(function(response){
 		    	   $scope.klant = {};
-		    	   $scope.klanten = [response.data];
+		    	   $scope.klanten = sort([response.data]);
 		       },
 		       function(response){
 		    	   alert('Klant bestaat al');
@@ -26,10 +52,10 @@ angular.module('klavertjevier-app').controller('KlantenController', function($sc
 		}
 		$http.get(searchUrl.href)
 		   .then(function(response){
-		    	   $scope.klanten = response.data;
+		    	   $scope.klanten = sort(response.data);
 		       },
 		       function(response){
-		    	   $scope.klanten = [];
+		    	   $scope.klanten = sort([]);
 		       });
 	}
 	
@@ -42,21 +68,26 @@ angular.module('klavertjevier-app').controller('KlantenController', function($sc
 	}
 
 	$scope.verwijderAlleKlanten = function(klant) {
-		$http({
-			method : 'DELETE',
-			url : '/rest/klanten'
-		}).then(function successCallback(response) {
-		}, function errorCallback(response) {
-		});
+		if (confirm("Bent u zeker dat u alle klanten wil verwijderen")) {
+			$http({
+				method : 'DELETE',
+				url : '/rest/klanten'
+			}).then(function successCallback(response) {
+			}, function errorCallback(response) {
+			});
+		}
 	}
 
 	$scope.verwijderKlant = function(klant) {
-		$http({
-			method : 'DELETE',
-			url : '/rest/klant/' + klant.id
-		}).then(function successCallback(response) {
-			$scope.klanten.splice($scope.klanten.indexOf(klant), 1);
-		}, function errorCallback(response) {
-		});
+		if (confirm("Bent u zeker dat u deze klant wil verwijderen?")) {
+			$http({
+				method : 'DELETE',
+				url : '/rest/klant/' + klant.id
+			}).then(function successCallback(response) {
+				$scope.klanten.splice($scope.klanten.indexOf(klant), 1);
+				$scope.klanten = sort($scope.klanten);
+			}, function errorCallback(response) {
+			});
+		}
 	}
 });

@@ -26,7 +26,7 @@ public class Order {
 	private LocalDate dag = LocalDate.now();
 	@ElementCollection
 	private List<OrderLijn> orderLijnen;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Klant klant;
 	@Enumerated(STRING)
 	private BetaalWijze betaaldMet;

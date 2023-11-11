@@ -2,6 +2,12 @@
 
 angular.module('klavertjevier-app').controller('AfrekenenController', function($scope, $http, $stateParams, $state) {
 	$scope.orders = [];
+	$scope.cashBetaaldMet = 0;
+	$scope.cashTerugTeGeven = 0;
+	
+	$scope.$watch("cashBetaaldMet", function(newVal){
+		$scope.cashTerugTeGeven = round($scope.cashBetaaldMet - $scope.totaalTeBetalen(), 2);
+	})
 	
 	$http({
 		method : 'GET',
@@ -98,7 +104,7 @@ angular.module('klavertjevier-app').controller('AfrekenenController', function($
 			url : '/rest/orders/geannuleerd',
 			data: order.id
 		}).then(function successCallback(response) {
-			$state.go('order-state', {klantId: $scope.klant.id});
+			$state.go('order-rechtzetting-state', {klantId: $scope.klant.id, orderId: order.id});
 		}, function errorCallback(response) {
 		});
 	}

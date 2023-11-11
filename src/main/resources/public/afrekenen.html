@@ -59,10 +59,19 @@
 		</div>
 		
 		<div class="row">
-<!-- 			<button type="submit" class="btn btn-primary btn-sm mr-1" ng-click="betaald()">Betaald</button> -->
 			<button type="submit" class="btn btn-primary btn-sm mr-1" ng-click="cashVerwerkt()">Cash verwerkt</button>
 			<button type="submit" class="btn btn-primary btn-sm mr-1" ng-click="elektronischVerwerkt()">Elektronische verwerkt</button>
 			<button type="submit" class="btn btn-primary btn-sm" ng-click="print()">Print</button>
 		</div>
+		
+		<br/>
+
+		<div class="row mb-3">
+ 			<dt class="col-sm-3">Cash betaald met</dt>
+  			<dd class="col-sm-9"><input ng-model="cashBetaaldMet" type="number" class="form-control" placeholder="Bedrag in euro" id="cashBetaaldMet"><span>&nbsp; &euro;</span></dd>
+ 			<dt class="col-sm-3">Terug te geven</dt>
+  			<dd class="col-sm-9">{{cashTerugTeGeven}} <span>&euro;</span></dd>
+		</div>
+
 	</div>
 </div>
